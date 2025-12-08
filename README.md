@@ -1,16 +1,43 @@
-# React + Vite
+# 🎴 Memory Card Game 🎲
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple memory card matching game built with React and TailwindCSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Card Matching Game**: Match pairs of fruit emoji cards
+- **Score Tracking**: Keep track of your score and moves
+- **Shuffle Algorithm**: Cards are randomly shuffled at the start of each game
+- **Reset Functionality**: Start a new game anytime with the "New Game" button
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** - UI framework with hooks (useState, useEffect)
+- **TailwindCSS** - Utility-first CSS framework for styling
+- **Vite** - Fast build tool and dev server
 
-## Expanding the ESLint configuration
+## Components
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `App.jsx` - Main game logic and state management
+- `GameStat.jsx` - Displays score, moves, and reset button
+- `GameBoard.jsx` - Renders the grid of fruit cards
+- `constants.js` - Game configuration (fruit emojis)
+
+## Game Logic
+
+- 16 cards total (8 pairs of fruit emojis)
+- Fisher-Yates shuffle algorithm for randomization
+- Responsive grid layout (4x4)
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+---
+
+Built as a learning project for React state management and component composition.

@@ -1,14 +1,12 @@
 
-const GameBoard = ({ fruitsArray }) => {
+const GameBoard = ({ fruitsArray, handleClick }) => {
     return (
-        <div>
-            <div className="grid grid-cols-4 gap-4">
-                {fruitsArray.map((fruit, index) => (
-                    <div key={index} className="bg-blue-400 p-4 rounded-md">
-                        {fruit}
-                    </div>
-                ))}
-            </div>
+        <div className="game-board">
+            {fruitsArray.map((fruit) => (
+                <div key={fruit.id} className="card" onClick={() => handleClick(fruit)}>
+                    {fruit.flipped ? fruit.fruit : "?"}
+                </div>
+            ))}
         </div>
     )
 }

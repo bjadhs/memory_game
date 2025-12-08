@@ -1,12 +1,87 @@
 @import "tailwindcss";
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@theme {
+    --color-primary: #6366f1;
+    --color-primary-hover: #4f46e5;
+    --color-surface: rgba(255, 255, 255, 0.9);
+    --color-surface-glass: rgba(255, 255, 255, 0.25);
 }
 
 body {
-    background-color: #f5f5f5;
-    text-color: #fff;
+    background: linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 100%);
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@layer components {
+
+    /* Main Game Container */
+    .game-container {
+        @apply flex flex-col items-center justify-center gap-4 p-4;
+        @apply w-full h-[100dvh] max-w-lg mx-auto overflow-hidden;
+    }
+
+    /* Glassmorphism Panel (for stats) */
+    .stats-panel {
+        @apply flex flex-row items-center justify-between gap-2 p-4 rounded-xl;
+        @apply backdrop-blur-md shadow-lg border border-white/20;
+        background: var(--color-surface);
+        @apply w-full max-w-sm;
+    }
+
+    .title {
+        @apply text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600;
+        @apply hidden sm:block;
+        /* Hide title on very small screens to save space */
+    }
+
+    .stats-row {
+        @apply flex gap-4 text-sm font-medium text-slate-600;
+    }
+
+    .stat-item {
+        @apply flex flex-col items-center;
+    }
+
+    .stat-value {
+        @apply text-lg font-bold text-slate-800 leading-none;
+    }
+
+    /* The Grid Board */
+    .game-board {
+        @apply grid grid-cols-4 gap-2 p-3 rounded-2xl;
+        @apply bg-white/20 backdrop-blur-sm shadow-xl;
+        @apply w-full aspect-square max-w-md;
+        /* Keeps board square and constrained */
+    }
+
+    /* Game Card */
+    .card {
+        /* Flexible size based on grid */
+        @apply w-full aspect-square flex items-center justify-center text-3xl sm:text-4xl cursor-pointer;
+        @apply bg-white rounded-lg shadow-sm transition-all duration-300;
+        @apply active:scale-95;
+        @apply select-none;
+    }
+
+    .card:hover {
+        @apply md:scale-105 md:shadow-md;
+        /* Hover effects only on non-touch devices ideally, or larger screens */
+    }
+
+    .card-matched {
+        @apply bg-green-100 ring-2 ring-green-400;
+    }
+
+    /* Primary Button */
+    .btn-primary {
+        @apply px-4 py-1.5 rounded-full text-sm font-semibold text-white shadow-md transition-all;
+        background-color: var(--color-primary);
+        @apply active:translate-y-0.5;
+        @apply hover:bg-indigo-600 hover:shadow-lg md:hover:-translate-y-0.5;
+    }
 }
