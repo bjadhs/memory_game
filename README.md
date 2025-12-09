@@ -1,43 +1,28 @@
-# 🎴 Memory Card Game 🎲
+# � Memory Game
 
-A simple memory card matching game built with React and TailwindCSS.
+A fun little memory card game built with **React** and **TailwindCSS**.
+Test your memory by matching pairs of fruits! 🧠✨
 
 ## Features
+- **Score Tracking**: Counts your moves and matches.
+- **Animations**: Smooth card flips and a celebration pop-up when you win.
+- **Responsive**: Works great on desktop and mobile.
+- **Auto Shuffle**: New game, new board layout every time.
 
-- **Card Matching Game**: Match pairs of fruit emoji cards
-- **Score Tracking**: Keep track of your score and moves
-- **Shuffle Algorithm**: Cards are randomly shuffled at the start of each game
-- **Reset Functionality**: Start a new game anytime with the "New Game" button
+## How to Run
 
-## Tech Stack
+1.  **Install**:
+    ```bash
+    npm install
+    ```
 
-- **React** - UI framework with hooks (useState, useEffect)
-- **TailwindCSS** - Utility-first CSS framework for styling
-- **Vite** - Fast build tool and dev server
+2.  **Play**:
+    ```bash
+    npm run dev
+    ```
 
-## Components
-
-- `App.jsx` - Main game logic and state management
-- `GameStat.jsx` - Displays score, moves, and reset button
-- `GameBoard.jsx` - Renders the grid of fruit cards
-- `constants.js` - Game configuration (fruit emojis)
-
-## Game Logic
-
-- 16 cards total (8 pairs of fruit emojis)
-- Fisher-Yates shuffle algorithm for randomization
-- Responsive grid layout (4x4)
-
-## Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
----
-
-Built as a learning project for React state management and component composition.
+## How to Play
+- Click a card to reveal the fruit.
+- Click another card to find its match.
+- If they match, they stay flipped! If not, they flip back.
+- Clear the board to win! 🎉

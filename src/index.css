@@ -22,7 +22,7 @@ body {
     /* Main Game Container */
     .game-container {
         @apply flex flex-col items-center justify-center gap-4 p-4;
-        @apply w-full h-[100dvh] max-w-lg mx-auto overflow-hidden;
+        @apply w-full h-[100vh] max-w-lg mx-auto overflow-hidden;
     }
 
     /* Glassmorphism Panel (for stats) */
@@ -56,12 +56,10 @@ body {
         @apply grid grid-cols-4 gap-2 p-3 rounded-2xl;
         @apply bg-white/20 backdrop-blur-sm shadow-xl;
         @apply w-full aspect-square max-w-md;
-        /* Keeps board square and constrained */
     }
 
     /* Game Card */
     .card {
-        /* Flexible size based on grid */
         @apply w-full aspect-square flex items-center justify-center text-3xl sm:text-4xl cursor-pointer;
         @apply bg-white rounded-lg shadow-sm transition-all duration-300;
         @apply active:scale-95;
@@ -70,7 +68,6 @@ body {
 
     .card:hover {
         @apply md:scale-105 md:shadow-md;
-        /* Hover effects only on non-touch devices ideally, or larger screens */
     }
 
     .card-matched {
@@ -84,4 +81,16 @@ body {
         @apply active:translate-y-0.5;
         @apply hover:bg-indigo-600 hover:shadow-lg md:hover:-translate-y-0.5;
     }
+
+    .game-overlay {
+        @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+    }
+
+    .game-model {
+        @apply bg-white/90 rounded-3xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center gap-6;
+        @apply border border-white/50;
+    }
+
 }
