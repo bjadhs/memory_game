@@ -22,7 +22,7 @@ body {
     /* Main Game Container */
     .game-container {
         @apply flex flex-col items-center justify-center gap-4 p-4;
-        @apply w-full h-[100vh] max-w-lg mx-auto overflow-hidden;
+        @apply w-full h-[100dvh] md:h-auto md:min-h-[600px] max-w-lg mx-auto overflow-hidden;
     }
 
     /* Glassmorphism Panel (for stats) */

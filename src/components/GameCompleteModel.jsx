@@ -1,5 +1,5 @@
 
-const GameCompleteModel = ({ startGame, score, moves }) => {
+const GameCompleteModel = ({ startGame, score, moves, highestScore }) => {
 
     return (
         <div className="game-overlay">
@@ -23,6 +23,9 @@ const GameCompleteModel = ({ startGame, score, moves }) => {
                         </div>
                     </div>
                 </div>
+                 <p className="text-gray-600 text-md">Your highest score is {highestScore}</p>
+                <p className="text-gray-600 text-md">You completed the game!</p>
+
                 <button
                     className="mt-6 px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 active:scale-95"
                     onClick={startGame}

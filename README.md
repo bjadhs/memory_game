@@ -26,3 +26,6 @@ Test your memory by matching pairs of fruits! 🧠✨
 - Click another card to find its match.
 - If they match, they stay flipped! If not, they flip back.
 - Clear the board to win! 🎉
+
+## Deployment in Vercel link:
+https://memory-game-tau-virid.vercel.app/

@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useMemoryGameLogic = (initialFruits) => {
-    const [score, setScore] = useState(0);
-    const [moves, setMoves] = useState(0);
-    const [fruitsArray, setFruitsArray] = useState([]);
-    const [flippedFruit, setFlippedFruit] = useState([]);
-    const [matchedFruit, setMatchedFruit] = useState([]);
-    const [isLocked, setIsLocked] = useState(false);
-
-    // Shuffle fruits array
+      // Shuffle fruits array
     const shuffledFruits = (fruits) => {
         for (let i = fruits.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
@@ -16,20 +9,30 @@ const useMemoryGameLogic = (initialFruits) => {
         }
         return fruits;
     }
-
-    const startGame = () => {
+    // Generate fruits
+    const generateFruits = () =>{
+        if(!initialFruits || initialFruits.length === 0) return [];
         const fruitsToShuffle = [...initialFruits];
         const fruitsBeingShuffled = shuffledFruits(fruitsToShuffle);
 
-        const finalFruitsArray = fruitsBeingShuffled.map((fruit, index) => {
-            return {
+        return  fruitsBeingShuffled.map((fruit, index) => ({
                 id: index,
                 fruit,
                 flipped: false,
                 matched: false
-            }
-        })
-        setFruitsArray(finalFruitsArray);
+            }))
+        }
+
+    const [score, setScore] = useState(0);
+    const [moves, setMoves] = useState(0);
+    const [fruitsArray, setFruitsArray] = useState(generateFruits);
+    const [flippedFruit, setFlippedFruit] = useState([]);
+    const [matchedFruit, setMatchedFruit] = useState([]);
+    const [isLocked, setIsLocked] = useState(false);
+    const [ highestScore, setHighestScore] = useState(localStorage.getItem("highestScore") || 0);
+
+    const startGame = () => {
+        setFruitsArray(generateFruits());
         setMoves(0);
         setScore(0);
         setFlippedFruit([]);
@@ -37,17 +40,7 @@ const useMemoryGameLogic = (initialFruits) => {
     }
 
 
-    useEffect(() => {
-        if (initialFruits && initialFruits.length > 0) {
-            startGame();
-            console.log("Fruits Array", fruitsArray)
-            console.log("Matched Fruit", matchedFruit)
-            console.log("Flipped Fruit", flippedFruit)
-        }
-    }, []);
-
     const handleClick = (fruit) => {
-        console.log(fruit, flippedFruit);
         if (flippedFruit.length === 2
             || isLocked
             || fruit.flipped
@@ -67,12 +60,20 @@ const useMemoryGameLogic = (initialFruits) => {
         // Fruit match if 2nd one is same as first
         if (flippedFruit.length === 1) {
             setIsLocked(true)
-            const firstFruit = fruitsArray[flippedFruit[0]]
+            const firstFruit = fruitsArray.find(f =>f.id === flippedFruit[0])
 
             if (firstFruit.fruit === fruit.fruit) {
                 setTimeout(() => {
+                    const newMatchedCount = matchedFruit.length + 2;
                     setMatchedFruit((prev) => [...prev, firstFruit.id, fruit.id])
                     setScore((prev) => prev + 1)
+                    if(newMatchedCount === fruitsArray.length){
+                        const finalScore = score+1;
+                        localStorage.setItem("highestScore", finalScore);
+                        setHighestScore(finalScore);
+                    }
+
+
                     setFruitsArray((prev) => prev.map(f => {
                         if (f.id === fruit.id || f.id === firstFruit.id) {
                             return { ...f, matched: true }
@@ -98,19 +99,20 @@ const useMemoryGameLogic = (initialFruits) => {
                     setIsLocked(false)
                 }, 1000)
             }
-        }
+        }  
     }
+    
+    const isGameOver = fruitsArray.length > 0 && matchedFruit.length === fruitsArray.length;
 
-    const isGameComplete = matchedFruit.length === fruitsArray.length && fruitsArray.length != 0;
 
     return {
         score,
         moves,
         fruitsArray,
-        isGameComplete,
+        isGameOver,
         handleClick,
         startGame,
-
+        highestScore
     }
 
 }
