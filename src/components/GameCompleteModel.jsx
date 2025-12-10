@@ -1,15 +1,18 @@
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 
 const GameCompleteModel = ({ startGame, score, moves }) => {
-    const lowestMove = localStorage.getItem("lowestMove") || 100;
+    const [lowestMove] = useState(()=>{
+        const currentLowestMove = parseInt(localStorage.getItem("lowestMove")) || 100;
+        if (moves < currentLowestMove) {
+            localStorage.setItem("lowestMove", moves);
+            return moves
+        }
+        return currentLowestMove;
+    })
 
     useEffect(() => {
-        if (moves < lowestMove) {
-            localStorage.setItem("lowestMove", moves);
-        }else{
-            localStorage.setItem("lowestMove", lowestMove);
-        }
-    });
+        
+    },[moves]);
 
     return (
         <div className="game-overlay">
@@ -33,7 +36,7 @@ const GameCompleteModel = ({ startGame, score, moves }) => {
                         </div>
                     </div>
                 </div>
-                 <p className="text-purple-600 text-sm font-bold">{lowestMove === 100 ? "You don't have lowest score yet." : `Your Lowest score is ${lowestMove} `}</p>
+                 <p className="text-purple-600 text-sm font-bold">{lowestMove === 100 ? "You don't have lowest score yet." : `Your Lowest best score is ${lowestMove} `}</p>
                 <p className="text-purple-600 text-xs">(Lowest is better - Max lowest is 16 moves.)</p>
 
                 <button
