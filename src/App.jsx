@@ -13,8 +13,7 @@ const App = () => {
     fruitsArray,
     isGameOver,
     handleClick,
-    startGame,
-    highestScore
+    startGame
   } = useMemoryGameLogic(fruits);
 
 
@@ -22,7 +21,7 @@ const App = () => {
   return (
     <div className='game-container'>
       <GameStat score={score} moves={moves} resetGame={startGame} />
-      {isGameOver && <GameCompleteModel startGame={startGame} score={score} moves={moves} highestScore={highestScore}/>}
+      {isGameOver && <GameCompleteModel startGame={startGame} score={score} moves={moves}/>}
       <GameBoard fruitsArray={fruitsArray} handleClick={handleClick} />
     </div>
   )

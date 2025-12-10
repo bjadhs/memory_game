@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useMemoryGameLogic = (initialFruits) => {
       // Shuffle fruits array
@@ -29,7 +29,6 @@ const useMemoryGameLogic = (initialFruits) => {
     const [flippedFruit, setFlippedFruit] = useState([]);
     const [matchedFruit, setMatchedFruit] = useState([]);
     const [isLocked, setIsLocked] = useState(false);
-    const [ highestScore, setHighestScore] = useState(localStorage.getItem("highestScore") || 0);
 
     const startGame = () => {
         setFruitsArray(generateFruits());
@@ -53,9 +52,11 @@ const useMemoryGameLogic = (initialFruits) => {
                 return f
             }
         })
+        
         setFruitsArray(newFruit);
         setFlippedFruit((prev) => [...prev, fruit.id]);
         setMoves((prev) => prev + 1);
+        
 
         // Fruit match if 2nd one is same as first
         if (flippedFruit.length === 1) {
@@ -64,16 +65,9 @@ const useMemoryGameLogic = (initialFruits) => {
 
             if (firstFruit.fruit === fruit.fruit) {
                 setTimeout(() => {
-                    const newMatchedCount = matchedFruit.length + 2;
                     setMatchedFruit((prev) => [...prev, firstFruit.id, fruit.id])
                     setScore((prev) => prev + 1)
-                    if(newMatchedCount === fruitsArray.length){
-                        const finalScore = score+1;
-                        localStorage.setItem("highestScore", finalScore);
-                        setHighestScore(finalScore);
-                    }
-
-
+                    
                     setFruitsArray((prev) => prev.map(f => {
                         if (f.id === fruit.id || f.id === firstFruit.id) {
                             return { ...f, matched: true }
@@ -94,6 +88,7 @@ const useMemoryGameLogic = (initialFruits) => {
                             return f
                         }
                     })
+                    
                     setFruitsArray(flipTheFruit)
                     setFlippedFruit([])
                     setIsLocked(false)
@@ -112,7 +107,6 @@ const useMemoryGameLogic = (initialFruits) => {
         isGameOver,
         handleClick,
         startGame,
-        highestScore
     }
 
 }
